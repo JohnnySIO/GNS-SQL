@@ -5,7 +5,7 @@ import mysql.connector
 
 connexionBD = None
 
-getConnexionBD() :
+def getConnexionBD() :
 	global connexionBD
 	try :
 		if connexionBD == None :
