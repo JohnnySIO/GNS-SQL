@@ -33,9 +33,10 @@ def getJoueurs() :
 		lesJoueurs = []
 		for unEnregistrement in enregistrements :
 			unJoueur = {}
-			unJoueur['numeroJoueur'] = unEnregistrement[ 0 ]
-			unJoueur['nomJoueur'] = unEnregistrement[ 1 ]
-			unJoueur['mdpJoueur'] = unEnregistrement[ 2 ]
+			unJoueur['numeroJoueur'] = unEnregistrement[0]
+			unJoueur['nomJoueur'] = unEnregistrement[1]
+			unJoueur['mdpJoueur'] = unEnregistrement[2]
+			lesJoueurs.append(unJoueur)
 		curseur.close
 		return lesJoueurs
 	except :
@@ -55,8 +56,9 @@ def getCouleur() :
 		lesCouleurs = []
 		for unEnregistrement in enregistrements :
 			uneCouleur = {}
-			uneCouleur['numeroCouleur'] = unEnregistrement[ 0 ]
-			uneCouleur['nomCouleur'] = unEnregistrement[ 1 ]
+			uneCouleur['numeroCouleur'] = unEnregistrement[0]
+			uneCouleur['nomCouleur'] = unEnregistrement[1]
+			lesCouleurs.append(uneCouleur)
 		curseur.close
 		return lesCouleurs
 	except :
@@ -78,28 +80,34 @@ def getParties() :
 		lesParties = []
 		for unEnregistrement in enregistrements :
 			unePartie = {}
-			unePartie['numeroPartie'] = unEnregistrement[ 0 ]
-			unePartie['dateCreation'] = unEnregistrement[ 1 ]
-			unePartie['numeroJoueur'] = unEnregistrement[ 2 ]
-			unePartie['numeroJoueur_1'] = unEnregistrement[ 3 ]
-			unePartie['numeroJoueur_2'] = unEnregistrement[ 4 ]
-			unePartie['numeroJoueur_3'] = unEnregistrement[ 5 ]
-			unePartie['numeroCouleur'] = unEnregistrement[ 6 ]
-			unePartie['numeroCouleur_1'] = unEnregistrement[ 7 ]
+			unePartie['numeroPartie'] = unEnregistrement[0]
+			unePartie['dateCreation'] = unEnregistrement[1]
+			unePartie['Initiateur'] = unEnregistrement[2]
+			unePartie['Adversaire'] = unEnregistrement[3]
+			unePartie['Vainqueur'] = unEnregistrement[4]
+			unePartie['Suivant'] = unEnregistrement[5]
+			unePartie['CouleurInit'] = unEnregistrement[6]
+			unePartie['CouleurAdverse'] = unEnregistrement[7]
+			
 			lesJoueurs = getJoueurs()
+			
 			for unJoueur in lesJoueurs :
-				if unePartie['numeroJoueur'] == unJoueur['numeroJoueur'] :
+				if unePartie['Initiateur'] == unJoueur['numeroJoueur'] :
 					unePartie['nomInit'] = unJoueur['nomJoueur']
+					
 			for unJoueur in lesJoueurs :
-				if unePartie['numeroJoueur_1'] == unJoueur['numeroJoueur'] :
+				if unePartie['Adversaire'] == unJoueur['numeroJoueur'] :
 					unePartie['nomAdverse'] = unJoueur['nomJoueur']
+					
 			lesCouleurs = getCouleur()
+			
 			for uneCouleur in lesCouleurs :
-				if unePartie['numeroCouleur'] == uneCouleur['numeroCouleur'] :
+				if unePartie['CouleurInit'] == uneCouleur['numeroCouleur'] :
 					unePartie['couleurInit'] = uneCouleur['nomCouleur']
 			for uneCouleur in lesCouleurs :
-				if unePartie['numeroCouleur_4'] == uneCouleur['numeroCouleur'] :
+				if unePartie['CouleurAdverse'] == uneCouleur['numeroCouleur'] :
 					unePartie['couleurAdverse'] = uneCouleur['nomCouleur']
+			lesParties.append( unePartie )
 			
 		curseur.close
 		return lesParties

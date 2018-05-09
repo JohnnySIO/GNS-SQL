@@ -67,13 +67,13 @@ insert into Couleur values (2,"Noir");
 
 #Insertion des parties
 
-insert into Partie values(1,"01/05/18",5,2,2,null,1,2);
-insert into Partie values(2,"01/05/18",5,2,5,null,2,1);
-insert into Partie values(3,"01/05/18",5,null,null,5,1,null);
-insert into Partie values(4,"01/05/18",2,null,null,null,2,null);
-insert into Partie values(5,"02/05/18",5,1,null,1,1,2);
-insert into Partie values(6,"02/05/18",5,1,null,5,1,2);
-insert into Partie values(7,"02/05/18",1,null,null,null,null,2);
-insert into Partie values(8,"02/05/18",1,null,null,null,null,2);
-insert into Partie values(9,"03/05/18",5,2,null,2,1,2);
-insert into Partie values(10,"03/05/18",2,1,2,null,2,1);
+insert into Partie values(1,"18/05/01",5,2,2,null,1,2);
+insert into Partie values(2,"18/05/01",5,2,5,null,2,1);
+insert into Partie values(3,"18/05/01",5,null,null,5,1,null);
+insert into Partie values(4,"18/05/01",2,null,null,null,2,null);
+insert into Partie values(5,"18/05/02",5,1,null,1,1,2);
+insert into Partie values(6,"18/05/02",5,1,null,5,1,2);
+insert into Partie values(7,"18/05/02",1,null,null,null,null,2);
+insert into Partie values(8,"18/05/02",1,null,null,null,null,2);
+insert into Partie values(9,"18/05/03",5,2,null,2,1,2);
+insert into Partie values(10,"18/05/03",2,1,2,null,2,1);
