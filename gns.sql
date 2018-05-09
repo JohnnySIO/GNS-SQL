@@ -51,14 +51,21 @@ ALTER TABLE Partie ADD CONSTRAINT FK_Partie_numeroJoueur_3 FOREIGN KEY (numeroJo
 ALTER TABLE Partie ADD CONSTRAINT FK_Partie_numeroCouleur FOREIGN KEY (numeroCouleur) REFERENCES Couleur(numeroCouleur);
 ALTER TABLE Partie ADD CONSTRAINT FK_Partie_numeroCouleur_4 FOREIGN KEY (numeroCouleur_4) REFERENCES Couleur(numeroCouleur);
 
+
+# Insertion des joueurs
+
 insert into Joueur values (1,"Nicolas","azerty");
 insert into Joueur values (2,"Ilona","azerty");
 insert into Joueur values (3,"George","azerty");
 insert into Joueur values (4,"Aïcha","azerty");
 insert into Joueur values (5,"Cody","azerty");
 
+#Insertion des couleurs
+
 insert into Couleur values (1,"Blanc");
 insert into Couleur values (2,"Noir");
+
+#Insertion des parties
 
 insert into Partie values(1,"01/05/18",5,2,2,null,1,2);
 insert into Partie values(2,"01/05/18",5,2,5,null,2,1);
