@@ -2,7 +2,7 @@
 # -*- coding: utf8 -*-
 
 import mysql.connector
-
+import datetime
 connexionBD = None
 
 def getConnexionBD() :
@@ -42,7 +42,7 @@ def getJoueurs() :
 	except :
 		return None
 		
-def getCouleur() :
+def getCouleurs() :
 	try :
 		curseur = getConnexionBD().cursor()
 		requete = '''
@@ -99,7 +99,7 @@ def getParties() :
 				if unePartie['Adversaire'] == unJoueur['numeroJoueur'] :
 					unePartie['nomAdverse'] = unJoueur['nomJoueur']
 					
-			lesCouleurs = getCouleur()
+			lesCouleurs = getCouleurs()
 			
 			for uneCouleur in lesCouleurs :
 				if unePartie['CouleurInit'] == uneCouleur['numeroCouleur'] :
@@ -111,5 +111,72 @@ def getParties() :
 			
 		curseur.close
 		return lesParties
+	except :
+		return None
+		
+def getPartie(numeroPartie) :
+	try :
+		curseur = getConnexionBD().cursor()
+		requete = '''
+					select *
+					from Partie
+					where numeroPartie = %s
+				'''
+		curseur.execute( requete , (numeroPartie , ) )
+		
+		enregistrement = curseur.fetchone()
+		
+		numPartie = {}
+		if enregistrement != None :
+			numPartie['numeroPartie'] = enregistrement[0]
+			numPartie['dateCreation'] = str(enregistrement[1])
+			numPartie['Initiateur'] = enregistrement[2]
+			numPartie['Adversaire'] = enregistrement[3]
+			numPartie['Vainqueur'] = enregistrement[4]
+			numPartie['Suivant'] = enregistrement[5]
+			numPartie['CouleurInit'] = enregistrement[6]
+			numPartie['CouleurAdverse'] = enregistrement[7]
+		curseur.close()
+		return numPartie
+	
+	except :
+		return None
+		
+def supprimerPartie(numeroPartie) :
+	try:
+		if getPartie(numeroPartie) == {} :
+			return False
+		curseur = getConnexionBD().cursor()
+
+		requete = '''
+			delete from Partie
+			where numeroPartie = %s
+			'''
+		curseur.execute(requete, ( numeroPartie , ) )
+		
+		connexionBD.commit()
+		curseur.close()
+		
+		return True
+	except:
+		return None
+
+def creerPartie( numeroInitiateur , numeroCouleurInitiateur ) :
+	try :
+		numPartie = len(getParties())+1
+		dateCreation = datetime.date.today()
+		curseur = getConnexionBD().cursor()
+		
+		requete = '''
+			insert into Partie values(%s,%s,%s,null,null,%s,%s,null)
+			'''
+		curseur.execute(requete, ( numPartie , dateCreation , numeroInitiateur , numeroInitiateur , numeroCouleurInitiateur ) )
+		
+		connexionBD.commit()
+		curseur.close
+		if getPartie(numPartie)['numeroPartie'] == {} :
+			return -1
+		else :
+			return numPartie
 	except :
 		return None
